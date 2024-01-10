@@ -17,7 +17,7 @@ public class QueueTest {
     }
 
     @Test
-    public void testPushShouldAddAtTheEnd() {
+    public void testOfferShouldAddAtTheEnd() {
         queue.offer("Slayer");
         assertEquals("0", queue.peek());
     }
@@ -63,12 +63,5 @@ public class QueueTest {
         for (String s : queue) {
             assertEquals(String.valueOf(last++), s);
         }
-    }
-    @Test
-    public void testNodeChaining() {
-        Queue<Integer> queue=new Queue<>();
-        queue.offer(13);
-        queue.offer(12);
-        queue.poll();
     }
 }

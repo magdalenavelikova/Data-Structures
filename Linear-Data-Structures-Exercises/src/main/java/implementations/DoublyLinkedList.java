@@ -4,7 +4,7 @@ import interfaces.LinkedList;
 
 import java.util.Iterator;
 
-public class SinglyLinkedList<E> implements LinkedList<E> {
+public class DoublyLinkedList<E> implements LinkedList<E> {
     private Node<E> head;
     private Node<E> tail;
     private int size;
@@ -16,25 +16,19 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
 
         public Node(E value) {
             this.value = value;
-            this.next = null;
-            this.previous = null;
         }
     }
 
-    public SinglyLinkedList() {
-        this.head = null;
-        this.tail = null;
-        this.size = 0;
+    public DoublyLinkedList() {
     }
 
     @Override
     public void addFirst(E element) {
         Node<E> toInsert = new Node<>(element);
         if (this.isEmpty()) {
-            this.head = toInsert;
-            this.tail = toInsert;
+            this.head = this.tail = toInsert;
         } else {
-            head.previous = toInsert;
+           this.head.previous = toInsert;
             toInsert.next = head;
             this.head = toInsert;
         }
@@ -46,23 +40,28 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
     public void addLast(E element) {
         Node<E> toInsert = new Node<>(element);
         if (this.isEmpty()) {
-            this.head = toInsert;
-            this.tail = toInsert;
+            this.addFirst(element);
         } else {
-            tail.next = toInsert;
+            this.tail.next = toInsert;
             toInsert.previous = tail;
             this.tail = toInsert;
+            this.size++;
         }
-        this.size++;
+
 
     }
 
     @Override
     public E removeFirst() {
-        ensureIsEmpty();
+        ensureNotEmpty();
+
         E value = this.head.value;
-        this.head = head.next;
-        head.previous = null;
+        if (this.size == 1) {
+            this.head = this.tail = null;
+        } else {
+            this.head = head.next;
+            head.previous = null;
+        }
         this.size--;
         return value;
     }
@@ -70,23 +69,28 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
 
     @Override
     public E removeLast() {
-        ensureIsEmpty();
+        ensureNotEmpty();
         E value = this.tail.value;
-        this.tail = tail.previous;
-        tail.next = null;
-        this.size--;
+        if (this.size == 1) {
+            this.removeFirst();
+        } else {
+            this.tail = tail.previous;
+            tail.next = null;
+            this.size--;
+        }
+
         return value;
     }
 
     @Override
     public E getFirst() {
-        ensureIsEmpty();
+        ensureNotEmpty();
         return this.head.value;
     }
 
     @Override
     public E getLast() {
-        ensureIsEmpty();
+        ensureNotEmpty();
         return this.tail.value;
     }
 
@@ -117,10 +121,9 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
         };
     }
 
-    private void ensureIsEmpty() {
+    private void ensureNotEmpty() {
         if (isEmpty()) {
             throw new IllegalStateException();
         }
     }
-
 }

@@ -14,7 +14,6 @@ public class Queue<E> implements AbstractQueue<E> {
         private E value;
         private Node<E> next;
 
-
         public Node(E value) {
             this.value = value;
             this.next = null;
@@ -32,8 +31,7 @@ public class Queue<E> implements AbstractQueue<E> {
         Node<E> toInsert = new Node<>(element);
 
         if (this.isEmpty()) {
-            this.head = toInsert;
-            this.tail = toInsert;
+            this.head = this.tail = toInsert;
         } else {
             this.tail.next = toInsert;
             this.tail = tail.next;
@@ -45,10 +43,14 @@ public class Queue<E> implements AbstractQueue<E> {
     @Override
     public E poll() {
         ensureNotEmpty();
-        E toPoll = this.head.value;
-        this.head = this.head.next;
+        E element = this.head.value;
+        if (this.size == 1) {
+            this.head = this.tail = null;
+        } else {
+            this.head = this.head.next;
+        }
         this.size--;
-        return toPoll;
+        return element;
     }
 
 
