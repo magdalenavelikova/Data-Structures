@@ -15,7 +15,7 @@ public class BalancedParenthesesTest {
 
     @Test
     public void zeroTestTwo() {
-        String input = "{[(])}";
+        String input = "{[a()]a}";
         Boolean solve = new BalancedParentheses(input).solve();
         assertNotNull(solve);
         assertFalse(solve);
