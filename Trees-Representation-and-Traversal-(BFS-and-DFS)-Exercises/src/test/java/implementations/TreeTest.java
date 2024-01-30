@@ -175,30 +175,13 @@ public class TreeTest {
 
     @Test
     public void testTreesWithGivenSum() {
-//        String[] input = {
-//                "7 19",
-//                "7 21",
-//                "7 14",
-//                "19 1",
-//                "19 12",
-//                "19 31",
-//                "14 23",
-//                "14 6"
-//        };
-//        TreeFactory treeFactory = new TreeFactory();
-//        Tree<Integer> tree = treeFactory.createTreeFromStrings(input);
-//        List<Tree<Integer>> trees = tree.subTreesWithGivenSum(43);
-//        String asString = trees.get(0).getAsString();
-//        assertTrue(asString.contains("14"));
-//        assertTrue(asString.contains("23"));
-//        assertTrue(asString.contains("6"));
         String[] input = {
                 "7 19",
                 "7 21",
                 "7 14",
                 "19 1",
                 "19 12",
-                "19 11",
+                "19 31",
                 "14 23",
                 "14 6"
         };
@@ -209,5 +192,6 @@ public class TreeTest {
         assertTrue(asString.contains("14"));
         assertTrue(asString.contains("23"));
         assertTrue(asString.contains("6"));
+
     }
 }

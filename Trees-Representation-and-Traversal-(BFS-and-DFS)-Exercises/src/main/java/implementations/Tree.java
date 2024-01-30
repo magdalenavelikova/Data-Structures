@@ -107,7 +107,9 @@ public class Tree<E> implements AbstractTree<E> {
             Tree<E> tree = queue.poll();
             allNodes.add(tree);
             for (Tree<E> child : tree.children) {
-                queue.offer(child);
+
+                    queue.offer(child);
+
             }
         }
         return allNodes;
